@@ -74,6 +74,7 @@ function ctxFor(req, extra = {}) {
 }
 
 const PRODUCT_COLS = `p.*,
+  (SELECT trade FROM categories WHERE id = p.category_id) AS trade,
   (SELECT COUNT(*) FROM variants v WHERE v.product_id = p.id) AS variant_count,
   (SELECT AVG(rating) FROM reviews r WHERE r.product_id = p.id AND r.approved = 1) AS rating,
   (SELECT COUNT(*) FROM reviews r WHERE r.product_id = p.id AND r.approved = 1) AS reviews`;
@@ -205,7 +206,7 @@ async function publicApi(req, res, url) {
     const q = str(url.searchParams.get("q"), 60);
     if (q.length < 2) return json(res, []);
     const { products } = listProducts({ q }, 1, 6);
-    return json(res, products.map((x) => ({ slug: x.slug, title: x.title, price: x.price, from: x.variant_count > 0, image: x.image, icon: x.icon })));
+    return json(res, products.map((x) => ({ slug: x.slug, title: x.title, price: x.price, from: x.variant_count > 0, image: x.image, icon: x.icon, trade: x.trade })));
   }
 
   if (req.method !== "POST") throw new HttpError(405, "Method not allowed");

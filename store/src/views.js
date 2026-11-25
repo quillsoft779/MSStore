@@ -9,7 +9,7 @@ const TRADE_UR = { E: "بجلی", S: "سینیٹری", H: "ہارڈویئر" };
 /* ------------------------------------------------------------------ layout */
 export function layout({ title, description = "", body, ctx, canonical = "", noindex = false, jsonld = null }) {
   const { s, cats, user } = ctx;
-  const nav = cats.map((c) => `<a href="/shop?c=${esc(c.slug)}">${icon(c.icon)}<span>${esc(c.name)}</span></a>`).join("");
+  const nav = cats.map((c) => `<a class="t-${c.trade}" href="/shop?c=${esc(c.slug)}">${icon(c.icon)}<span>${esc(c.name)}</span></a>`).join("");
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -85,7 +85,7 @@ ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld).replace(
 /* ------------------------------------------------------------------ pieces */
 export function thumb(p, cls = "thumb") {
   if (p.image) return `<div class="${cls}"><img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy"></div>`;
-  return `<div class="${cls} ${cls}--draw">${icon(p.icon, "thumb__ico")}<span class="thumb__sku">${esc(p.sku || "")}</span></div>`;
+  return `<div class="${cls} ${cls}--draw t-${esc(p.trade || "")}">${icon(p.icon, "thumb__ico")}<span class="thumb__sku">${esc(p.sku || "")}</span></div>`;
 }
 
 const stars = (r) => {
@@ -129,7 +129,7 @@ export function home(ctx, { featured, offers, trades, newest }) {
       <p class="hero__chips">Popular: <a href="/shop?q=wire">Wire</a><a href="/shop?q=mcb">MCB</a><a href="/shop?q=ppr">PPR</a><a href="/shop?q=led">LED bulb</a><a href="/shop?q=mixer">Mixer</a></p>
     </div>
     <div class="trades">
-      ${trades.map((t) => `<a class="trade" href="/shop?t=${t.trade}">
+      ${trades.map((t) => `<a class="trade t-${t.trade}" href="/shop?t=${t.trade}">
         <span class="trade__k">${t.trade}</span>
         <b>${TRADES[t.trade]}</b><em lang="ur">${TRADE_UR[t.trade]}</em>
         <small>${t.n} products →</small></a>`).join("")}
@@ -149,7 +149,7 @@ ${featured.length ? `<section class="block"><div class="wrap">
 
 <section class="block block--tint"><div class="wrap">
   <div class="block__head"><h2>Shop by department</h2></div>
-  <div class="depts">${ctx.cats.map((c) => `<a class="dept" href="/shop?c=${esc(c.slug)}">${icon(c.icon)}<span><b>${esc(c.name)}</b><em lang="ur">${esc(c.name_ur)}</em></span></a>`).join("")}</div>
+  <div class="depts">${ctx.cats.map((c) => `<a class="dept t-${c.trade}" href="/shop?c=${esc(c.slug)}">${icon(c.icon)}<span><b>${esc(c.name)}</b><em lang="ur">${esc(c.name_ur)}</em></span></a>`).join("")}</div>
 </div></section>
 
 ${offers.length ? `<section class="block"><div class="wrap">
@@ -234,7 +234,7 @@ export function product(ctx, { p, variants, cat, related, reviews, rating }) {
 <div class="wrap pdp">
   <nav class="crumbs"><a href="/">Home</a><span>/</span>${cat ? `<a href="/shop?c=${esc(cat.slug)}">${esc(cat.name)}</a><span>/</span>` : ""}${esc(p.title)}</nav>
   <div class="pdp__grid">
-    <div class="pdp__media">${thumb(p, "pimg")}</div>
+    <div class="pdp__media">${thumb({ ...p, trade: cat?.trade }, "pimg")}</div>
     <div class="pdp__info" data-product='${esc(JSON.stringify({ id: p.id, title: p.title, variants: variants.map((v) => ({ id: v.id, name: v.name, price: v.price, compare: v.compare_price, stock: v.stock })), price: p.price, stock: p.stock }))}'>
       ${cat ? `<a class="eyebrow" href="/shop?c=${esc(cat.slug)}">${esc(cat.name)}</a>` : ""}
       <h1>${esc(p.title)}</h1>

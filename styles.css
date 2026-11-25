@@ -5,21 +5,24 @@
    ============================================================ */
 
 :root {
-  --paper: #ece6d8;
-  --paper-2: #e3dbc8;
-  --paper-3: #f6f2e9;
-  --ink: #16150f;
-  --ink-2: #3a372e;
-  --muted: #6b6558;
-  --line: rgba(22, 21, 15, .16);
-  --line-strong: rgba(22, 21, 15, .38);
-  --yellow: #f3c623;
-  --copper: #b8572a;
-  --blue: #2f6f9f;
-  --night: #101114;
-  --night-2: #1a1c21;
-  --green: #3fbf6a;
-  --wa: #1f8f4e;
+  --paper: #f3f6fd;
+  --paper-2: #e6ecf8;
+  --paper-3: #ffffff;
+  --ink: #0e1d3d;
+  --ink-2: #33425f;
+  --muted: #627089;
+  --line: rgba(14, 29, 61, .12);
+  --line-strong: rgba(14, 29, 61, .3);
+  --yellow: #ffc61a;
+  --copper: #f05a16;
+  --blue: #1d4ed8;
+  --night: #070d1f;
+  --night-2: #0f1a36;
+  --green: #22c55e;
+  --wa: #1f9d55;
+  --navy: #0b2566;
+  --aqua: #0891b2;
+  --orange: #ea580c;
 
   --f-display: "Archivo", "Arial Narrow", sans-serif;
   --f-body: "Archivo", system-ui, sans-serif;
@@ -370,3 +373,95 @@ section[id] { scroll-margin-top: 60px; }
 .drawer__shop:hover { text-decoration: underline; }
 .cabinet__cta { text-align: center; margin: 26px 0 0; }
 @media (max-width: 860px) { .head__shop { display: none; } }
+
+
+/* =====================================================================
+   COLOUR THEME — bright shop front (blue · yellow · orange)
+   Electric = blue, Sanitary = aqua, Hardware = orange
+   ===================================================================== */
+body { background: var(--paper); }
+.strip { background: linear-gradient(90deg, var(--navy), var(--blue)); color: #fff; }
+.strip__tel { color: var(--yellow); }
+.head { background: rgba(255,255,255,.95); border-bottom: 0; box-shadow: 0 2px 14px -8px rgba(14,29,61,.3); }
+.brand__text strong { color: var(--navy); }
+.brand__text small { color: var(--blue); }
+.nav a::after { background: var(--orange); }
+
+.btn--ink { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 8px 18px -10px rgba(29,78,216,.8); }
+.btn--ink:hover { background: var(--navy); border-color: var(--navy); }
+.btn--yellow { border-color: var(--yellow); color: var(--ink); box-shadow: 0 10px 22px -10px rgba(255,170,0,.9); }
+.btn--yellow:hover { box-shadow: 0 14px 26px -10px rgba(255,170,0,1); background: #ffb300; border-color: #ffb300; }
+.btn--line { border-color: var(--blue); color: var(--blue); }
+.btn--line:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+.head__shop { box-shadow: 0 8px 18px -10px rgba(255,170,0,.9); }
+
+/* hero — bright blue with a circuit pattern; the light switch still turns it to night */
+.hero { color: #fff;
+  background:
+    radial-gradient(circle at 78% 28%, rgba(255,198,26,.42), transparent 34%),
+    radial-gradient(circle at 4% 96%, rgba(8,145,178,.55), transparent 36%),
+    linear-gradient(135deg, #0b2566 0%, #1d4ed8 60%, #2563eb 100%); }
+.hero::before { content: ""; position: absolute; inset: 0; opacity: .14; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' fill='none' stroke='white' stroke-width='1.4'%3E%3Cpath d='M0 40h50l10 10h40l10-10h50M30 0v20l10 10v30M120 160v-30l-10-10V80M0 120h30l10 10h40'/%3E%3Ccircle cx='40' cy='60' r='3'/%3E%3Ccircle cx='110' cy='80' r='3'/%3E%3Ccircle cx='80' cy='130' r='3'/%3E%3C/svg%3E"); }
+.hero > .wrap { position: relative; }
+.kicker { color: var(--yellow); }
+.hero__title { color: #fff; text-shadow: 0 4px 30px rgba(0,0,0,.18); }
+.hero__title mark { color: var(--ink); text-shadow: none; padding: 0 .06em; }
+.hero__title mark::after { height: .84em; bottom: .03em; background: var(--yellow); }
+.hero__title .mark--blue::after { background: #67e8f9; }
+.hero__urdu { color: #e3ebff; }
+.hero__lede { color: #dbe6ff; }
+.hero .btn--line { background: transparent; border-color: rgba(255,255,255,.75); color: #fff; }
+.hero .btn--line:hover { background: #fff; border-color: #fff; color: var(--blue); }
+.switch__hint { color: #c7d4ff; }
+.facts { border-top-color: rgba(255,255,255,.28); }
+.facts li { border-right-color: rgba(255,255,255,.18); }
+.facts b { color: var(--yellow); }
+.facts span { color: #c7d4ff; }
+@media (max-width: 860px) { .facts li, .facts li + li { border-bottom-color: rgba(255,255,255,.18); } }
+
+/* section headings */
+.sec-head { border-top-color: var(--blue); }
+.sec-head h2 { color: var(--navy); }
+.sec-head__no { color: var(--orange); font-weight: 500; }
+
+/* parts cabinet — blue cabinet, white drawers, colour per department */
+.cabinet { background: linear-gradient(160deg, #0b2566, #1d4ed8); box-shadow: 0 30px 60px -30px rgba(11,37,102,.9); }
+.cabinet__col:nth-child(1) { --tc: #1d4ed8; --tl: #e2eaff; }
+.cabinet__col:nth-child(2) { --tc: #0891b2; --tl: #d9f4fa; }
+.cabinet__col:nth-child(3) { --tc: #ea580c; --tl: #ffe9d6; }
+.cabinet__trade { color: #fff; }
+.cabinet__trade span { background: var(--tc); color: #fff; box-shadow: 0 0 0 2px rgba(255,255,255,.85); }
+.cabinet__trade em { color: #dbe6ff; }
+.drawer { background: #081a48; }
+.drawer__front { background: linear-gradient(180deg, #ffffff, #e9eef9); }
+.drawer__label { background: var(--tl); border-color: var(--tc); box-shadow: inset 0 0 0 2px #fff; }
+.drawer__label svg { stroke: var(--tc); }
+.drawer__label code { color: var(--tc); }
+.drawer__label b { color: var(--ink); }
+.drawer__pull { background: linear-gradient(180deg, #b9c3d9, #7c89a6); }
+.drawer.is-open .drawer__label { border-color: var(--tc); }
+.drawer__body ul { color: #e6ecfb; }
+.drawer__body li { border-bottom-color: rgba(255,255,255,.14); }
+
+/* 24-hour section */
+.night { background: linear-gradient(160deg, #06102b, #0b2566); }
+.night__clock { background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border-color: rgba(255,255,255,.16); }
+
+/* send-a-list section on warm yellow */
+#list { background: linear-gradient(180deg, #fff6d1, #ffeaa8); }
+#list .sec-head { border-top-color: var(--orange); }
+.ticks li { border-bottom-color: rgba(14,29,61,.12); }
+.ticks li::before { border-color: var(--orange); }
+.parchi { box-shadow: 0 1px 0 rgba(0,0,0,.05), 0 28px 50px -24px rgba(124,72,0,.55); }
+
+/* visit */
+.visit { border: 0; background: #fff; box-shadow: 0 20px 44px -26px rgba(14,29,61,.55); }
+.visit__map { border-right: 0; }
+.visit__card dt { color: var(--orange); }
+@media (max-width: 860px) { .visit__map { border-bottom: 0; } }
+
+/* footer + phone bar */
+.foot { background: linear-gradient(180deg, #0b2566, #081a48); }
+.foot__urdu { color: #c3cee9; }
+.foot__meta { color: #a9b7da; }
+.dock { background: var(--navy); border-top-color: var(--yellow); }

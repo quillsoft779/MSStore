@@ -41,7 +41,7 @@ export function quote({ items = [], code = "", city = "", delivery = "delivery" 
   const lines = [];
   for (const it of Array.isArray(items) ? items.slice(0, 100) : []) {
     const qty = Math.max(1, Math.min(999, int(it.qty, 1)));
-    const p = get("SELECT p.*, c.slug cat_slug FROM products p LEFT JOIN categories c ON c.id = p.category_id WHERE p.id = ? AND p.status = 'active'", int(it.productId));
+    const p = get("SELECT p.*, c.slug cat_slug, c.trade FROM products p LEFT JOIN categories c ON c.id = p.category_id WHERE p.id = ? AND p.status = 'active'", int(it.productId));
     if (!p) continue;
     const variants = all("SELECT * FROM variants WHERE product_id = ? ORDER BY sort, id", p.id);
     let v = null;
@@ -53,7 +53,7 @@ export function quote({ items = [], code = "", city = "", delivery = "delivery" 
     const stock = v ? v.stock : p.stock;
     lines.push({
       productId: p.id, variantId: v ? v.id : null, slug: p.slug, title: p.title, variant: v ? v.name : "",
-      unit: p.unit, image: p.image, icon: p.icon, price, qty, stock, lineTotal: price * qty,
+      unit: p.unit, image: p.image, icon: p.icon, trade: p.trade, price, qty, stock, lineTotal: price * qty,
       error: stock <= 0 ? "Out of stock" : qty > stock ? `Only ${stock} left` : ""
     });
   }

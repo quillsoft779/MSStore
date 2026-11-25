@@ -58,7 +58,7 @@
 
   const thumb = (l) => l.image
     ? `<div class="thumb"><img src="${esc(l.image)}" alt=""></div>`
-    : `<div class="thumb thumb--draw"><svg class="thumb__ico" viewBox="0 0 32 32">${S.icons[l.icon] || S.icons.box || ""}</svg></div>`;
+    : `<div class="thumb thumb--draw t-${esc(l.trade || "")}"><svg class="thumb__ico" viewBox="0 0 32 32">${S.icons[l.icon] || S.icons.box || ""}</svg></div>`;
 
   function linesHTML(q) {
     return q.lines.map((l, i) => `
@@ -312,7 +312,7 @@
           const r = await fetch("/api/search?q=" + encodeURIComponent(q), { signal: ctl.signal });
           const items = await r.json();
           if (!items.length) { pop.innerHTML = `<a href="/shop?q=${encodeURIComponent(q)}"><span>No quick match — search all for “${esc(q)}”</span></a>`; pop.hidden = false; return; }
-          pop.innerHTML = items.map((x) => `<a href="/p/${esc(x.slug)}">${x.image ? `<img src="${esc(x.image)}" alt="">` : `<svg class="ico" viewBox="0 0 32 32">${S.icons[x.icon] || ""}</svg>`}<span>${esc(x.title)}</span><em>${x.from ? "from " : ""}${money(x.price)}</em></a>`).join("")
+          pop.innerHTML = items.map((x) => `<a href="/p/${esc(x.slug)}">${x.image ? `<img src="${esc(x.image)}" alt="">` : `<span class="sico t-${esc(x.trade || "")}"><svg class="ico" viewBox="0 0 32 32">${S.icons[x.icon] || ""}</svg></span>`}<span>${esc(x.title)}</span><em>${x.from ? "from " : ""}${money(x.price)}</em></a>`).join("")
             + `<a href="/shop?q=${encodeURIComponent(q)}"><span>See all results →</span></a>`;
           pop.hidden = false; active = -1;
         } catch {}
