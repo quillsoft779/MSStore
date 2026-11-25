@@ -67,7 +67,8 @@ Set these environment variables on the host:
 | `SETUP_CODE` | a long random code | Only someone with this code can create the first owner account at `/admin`. Remove it once you've set up. |
 | `TRUST_PROXY` | `1` | Already set in the Dockerfile. Uses the visitor's real address for login/checkout limits behind the host's proxy. Leave unset if the store faces the internet directly. |
 
-A health check is available at `/healthz` (Railway uses it automatically via `railway.json`).
+A health check is available at `/healthz`. On Railway, set it as the service's health check path
+(Settings → Deploy), along with root directory `/store`.
 
 Then point a domain or subdomain (e.g. `shop.yourdomain.pk`) at it.
 

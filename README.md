@@ -30,10 +30,10 @@ Shop at http://localhost:3000, admin at http://localhost:3000/admin.
 
 ## Deploying the store
 
-The store deploys from the **`store/`** folder (it has a `Dockerfile` and `railway.json`).
-On Railway: set the service's root directory to `store`, attach a volume at `/data`,
-and set `BASE_URL` to the public address. Optionally set `SETUP_CODE` so only you can
-create the first admin account. Full details are in [`store/README.md`](store/README.md).
+The store deploys from the **`store/`** folder, which has a `Dockerfile`. It is live on Railway
+(project *accurate-optimism*, service *MSStore*): root directory `/store`, volume at `/data`,
+health check `/healthz`, and `BASE_URL`, `PORT` and `SETUP_CODE` set as variables.
+Every push to `main` redeploys it. Full details are in [`store/README.md`](store/README.md).
 
 After the store is live, put its address in `STORE_URL` near the end of `script.js`
 so the website's "Shop online" buttons appear.
