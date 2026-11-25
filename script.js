@@ -73,7 +73,7 @@
      for example "https://shop.yourdomain.pk". While it still says
      localhost, the shop buttons only appear when you preview this
      site on your own computer, so visitors never see a broken link. */
-  var STORE_URL = "http://localhost:3000";
+  var STORE_URL = "https://msstore-production-16fad26d.up.railway.app";
 
   var here = location.hostname;
   var previewing = location.protocol === "file:" || /^(localhost|127\.0\.0\.1|\[::1\])$/.test(here);
