@@ -1,0 +1,15 @@
+{
+  "name": "malik-shahzad-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Online store for Malik Shahzad Electric, Hardware & Sanitary Store — storefront, cart, checkout and admin panel.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=22.13"
+  }
+}

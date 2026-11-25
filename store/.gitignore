@@ -1,0 +1,4 @@
+data/
+.setup-code.txt
+node_modules/
+*.log

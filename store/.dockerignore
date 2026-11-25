@@ -1,0 +1,6 @@
+data
+node_modules
+*.log
+.git
+.setup-code.txt
+README.md

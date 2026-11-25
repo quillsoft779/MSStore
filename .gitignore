@@ -1,0 +1,15 @@
+# Local-only files
+.claude/
+upload/
+*.zip
+
+# Store data (database, customer orders, uploaded photos) and secrets — never commit
+store/data/
+store/.setup-code.txt
+.env
+.env.*
+
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
